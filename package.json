@@ -1,0 +1,26 @@
+{
+  "name": "@scola/auth-common",
+  "version": "0.0.0",
+  "description": "Authorization (common)",
+  "repository": "github:scola84/node-auth-common",
+  "author": "M.C. van den Boogaart <scola@kvdb.name>",
+  "license": "MIT",
+  "main": "./dist/auth-common.js",
+  "jsnext:main": "index.js",
+  "dependencies": {
+    "@scola/validator": "^5.0.0"
+  },
+  "devDependencies": {
+    "rollup": "^0.36.1",
+    "rollup-plugin-buble": "^0.14.0",
+    "uglify-js": "^2.7.3"
+  },
+  "scripts": {
+    "build": "npm run cleanup && npm run rollup",
+    "build:min": "npm run build && npm run min",
+    "cleanup": "rm -rf dist",
+    "min": "uglifyjs dist/auth-common.js -m -o dist/auth-common.min.js",
+    "prepublish": "npm run build:min",
+    "rollup": "rollup -c"
+  }
+}
