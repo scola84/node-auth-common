@@ -4,6 +4,7 @@ const rolesByValue = {};
 export default class User {
   constructor() {
     this._id = null;
+    this._token = null;
     this._username = null;
     this._roles = null;
   }
@@ -14,6 +15,15 @@ export default class User {
     }
 
     this._id = value;
+    return this;
+  }
+
+  token(value) {
+    if (typeof value === 'undefined') {
+      return this._token;
+    }
+
+    this._token = value;
     return this;
   }
 
@@ -47,7 +57,7 @@ export default class User {
     return (this._roles & roles) !== 0;
   }
 
-  highest(){
+  highest() {
     // Adapted from http://stackoverflow.com/a/672137
     let roles = this._roles;
 
