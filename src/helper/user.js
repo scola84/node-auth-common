@@ -1,5 +1,5 @@
-const rolesByName = {};
-const rolesByValue = {};
+const roles = {};
+const permissions = {};
 
 export default class User {
   constructor() {
@@ -49,31 +49,36 @@ export default class User {
     return this;
   }
 
-  is(...roles) {
-    roles = roles.reduce((result, current) => {
-      return result | rolesByName[current];
+  is(...list) {
+    list = list.reduce((result, current) => {
+      return result | roles[current];
     }, 0);
 
-    return (this._roles & roles) !== 0;
+    return (this._roles & list) !== 0;
+  }
+
+  may(method, name) {
+    let may = false;
+
+    Object.keys(roles).forEach((role) => {
+      may = may || Boolean(this.is(role) &&
+        permissions[name] &&
+        permissions[name][role] &&
+        permissions[name][role].indexOf(method) !== -1);
+    });
+
+    return may;
   }
 
   highest() {
     // Adapted from http://stackoverflow.com/a/672137
-    let roles = this._roles;
+    let list = this._roles;
 
     for (let i = 0; i < 5; i += 1) {
-      roles |= (roles >> Math.pow(2, i));
+      list |= (list >> Math.pow(2, i));
     }
 
-    return (roles & ~(roles >> 1));
-  }
-
-  roleName(value) {
-    return rolesByValue[value];
-  }
-
-  roleValue(name) {
-    return rolesByName[name];
+    return (list & ~(list >> 1));
   }
 
   toObject() {
@@ -84,9 +89,12 @@ export default class User {
     };
   }
 
-  static defineRole(name, value) {
-    rolesByName[name] = value;
-    rolesByValue[value] = name;
+  static permission(name, value) {
+    permissions[name] = value;
+  }
+
+  static role(name, value) {
+    roles[name] = value;
   }
 
   static fromObject(user) {
