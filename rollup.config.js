@@ -5,6 +5,7 @@ export default {
   entry: 'index.js',
   format: 'cjs',
   external: [
+    '@scola/core',
     '@scola/validator'
   ],
   plugins: [
