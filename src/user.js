@@ -1,16 +1,23 @@
-const roles = {};
-const permissions = {};
-
 export default class User {
   constructor() {
+    this._auth = null;
     this._id = null;
     this._token = null;
     this._username = null;
     this._roles = null;
   }
 
-  id(value) {
-    if (typeof value === 'undefined') {
+  auth(value = null) {
+    if (value === null) {
+      return this._auth;
+    }
+
+    this._auth = value;
+    return this;
+  }
+
+  id(value = null) {
+    if (value === null) {
       return this._id;
     }
 
@@ -18,8 +25,8 @@ export default class User {
     return this;
   }
 
-  token(value) {
-    if (typeof value === 'undefined') {
+  token(value = null) {
+    if (value === null) {
       return this._token;
     }
 
@@ -27,8 +34,8 @@ export default class User {
     return this;
   }
 
-  username(value) {
-    if (typeof value === 'undefined') {
+  username(value = null) {
+    if (value === null) {
       return this._username;
     }
 
@@ -36,8 +43,8 @@ export default class User {
     return this;
   }
 
-  roles(value) {
-    if (typeof value === 'undefined') {
+  roles(value = null) {
+    if (value === null) {
       return this._roles;
     }
 
@@ -50,6 +57,8 @@ export default class User {
   }
 
   is(...list) {
+    const roles = this._auth.roles();
+
     list = list.reduce((result, current) => {
       return result | roles[current];
     }, 0);
@@ -58,6 +67,9 @@ export default class User {
   }
 
   may(method, name) {
+    const roles = this._auth.roles();
+    const permissions = this._auth.permissions();
+
     let may = false;
 
     Object.keys(roles).forEach((role) => {
@@ -87,20 +99,5 @@ export default class User {
       username: this._username,
       roles: this._roles
     };
-  }
-
-  static permission(name, value) {
-    permissions[name] = value;
-  }
-
-  static role(name, value) {
-    roles[name] = value;
-  }
-
-  static fromObject(user) {
-    return new User()
-      .id(user.id)
-      .username(user.username)
-      .roles(user.roles);
   }
 }
