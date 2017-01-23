@@ -5,6 +5,6 @@ export { default as User } from './src/user';
 export { default as passwordValidator } from './src/validator/password';
 export { default as tokenValidator } from './src/validator/token';
 
-export function load(i18n) {
-  i18n.strings(strings);
+export function load(app) {
+  app.i18n().strings(strings);
 }

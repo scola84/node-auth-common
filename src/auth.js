@@ -27,6 +27,15 @@ export default class Auth {
     return this;
   }
 
+  model(value = null) {
+    if (value === null) {
+      return this._model;
+    }
+
+    this._model = value;
+    return this;
+  }
+
   roles(value = null) {
     if (value === null) {
       return this._roles;
