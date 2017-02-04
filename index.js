@@ -6,5 +6,7 @@ export { default as passwordValidator } from './src/validator/password';
 export { default as tokenValidator } from './src/validator/token';
 
 export function load(app) {
-  app.i18n().strings(strings);
+  if (app.i18n()) {
+    app.i18n().strings(strings);
+  }
 }
