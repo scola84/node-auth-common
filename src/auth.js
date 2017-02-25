@@ -59,10 +59,9 @@ export default class Auth {
       .auth(this);
 
     if (value) {
-      user
-        .id(value.id)
-        .username(value.username)
-        .roles(value.roles);
+      user.id(value.id);
+      user.roles(value.roles);
+      user.token(value.token);
     }
 
     return user;

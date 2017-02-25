@@ -1,14 +1,16 @@
 export default {
   scola: {
     auth: {
-      username: 'Username',
+      ok: 'OK',
       password: 'Password',
-      persistent: 'Keep me signed in'
+      persistent: 'Keep me signed in',
+      username: 'Username'
     },
     error: {
-      invalid_auth: 'You are not logged in.',
-      invalid_password: 'Your username and/or password are incorrect.',
-      invalid_token: 'An error occurred while logging in.'
+      invalid_auth: 'You have no access.',
+      invalid_credentials: 'Your username and/or password are incorrect.',
+      invalid_token: 'Your session has expired.',
+      invalid_user: 'You are not logged in.'
     }
   }
 };

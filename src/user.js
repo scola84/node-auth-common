@@ -2,9 +2,8 @@ export default class User {
   constructor() {
     this._auth = null;
     this._id = null;
-    this._token = null;
-    this._username = null;
     this._roles = null;
+    this._token = null;
   }
 
   auth(value = null) {
@@ -31,15 +30,6 @@ export default class User {
     }
 
     this._token = value;
-    return this;
-  }
-
-  username(value = null) {
-    if (value === null) {
-      return this._username;
-    }
-
-    this._username = value;
     return this;
   }
 
@@ -96,8 +86,8 @@ export default class User {
   toObject() {
     return {
       id: this._id,
-      username: this._username,
-      roles: this._roles
+      roles: this._roles,
+      token: this._token
     };
   }
 }
