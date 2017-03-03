@@ -1,12 +1,19 @@
+import Auth from './src/auth';
+import User from './src/user';
+import passwordValidator from './src/validator/password';
+import tokenValidator from './src/validator/token';
 import strings from './src/i18n/strings';
 
-export { default as Auth } from './src/auth';
-export { default as User } from './src/user';
-export { default as passwordValidator } from './src/validator/password';
-export { default as tokenValidator } from './src/validator/token';
-
-export function load(app) {
+function load(app) {
   if (app.i18n()) {
     app.i18n().strings(strings);
   }
 }
+
+export {
+  Auth,
+  User,
+  passwordValidator,
+  tokenValidator,
+  load
+};
