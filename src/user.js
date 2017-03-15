@@ -1,6 +1,9 @@
+import get from 'lodash-es/get';
+
 export default class User {
   constructor() {
     this._auth = null;
+    this._details = null;
     this._id = null;
     this._roles = null;
     this._token = null;
@@ -15,12 +18,34 @@ export default class User {
     return this;
   }
 
+  details(value = null) {
+    if (value === null) {
+      return this._details;
+    }
+
+    this._details = value;
+    return this;
+  }
+
+  detail(name) {
+    return get(this._details, name);
+  }
+
   id(value = null) {
     if (value === null) {
       return this._id;
     }
 
     this._id = value;
+    return this;
+  }
+
+  roles(value = null) {
+    if (value === null) {
+      return this._roles;
+    }
+
+    this._roles = value;
     return this;
   }
 
@@ -33,20 +58,30 @@ export default class User {
     return this;
   }
 
-  roles(value = null) {
-    if (value === null) {
-      return this._roles;
+  highest(name = false) {
+    // Adapted from http://stackoverflow.com/a/672137
+    let role = this._roles;
+
+    for (let i = 0; i < 5; i += 1) {
+      role |= (role >> Math.pow(2, i));
     }
 
-    if (this._roles) {
-      return this;
-    }
-
-    this._roles = value;
-    return this;
+    role = (role & ~(role >> 1));
+    return name === true ? this.name(role) : role;
   }
 
-  is(...list) {
+  name(number) {
+    let result = '';
+    const roles = this._auth.roles();
+
+    Object.keys(roles).forEach((name) => {
+      result = roles[name] === number ? name : result;
+    });
+
+    return result;
+  }
+
+  is(list) {
     const roles = this._auth.roles();
 
     list = list.reduce((result, current) => {
@@ -56,35 +91,9 @@ export default class User {
     return (this._roles & list) !== 0;
   }
 
-  may(method, name) {
-    const roles = this._auth.roles();
-    const permissions = this._auth.permissions();
-
-    let may = false;
-
-    Object.keys(roles).forEach((role) => {
-      may = may || Boolean(this.is(role) &&
-        permissions[name] &&
-        permissions[name][role] &&
-        permissions[name][role].indexOf(method) !== -1);
-    });
-
-    return may;
-  }
-
-  highest() {
-    // Adapted from http://stackoverflow.com/a/672137
-    let list = this._roles;
-
-    for (let i = 0; i < 5; i += 1) {
-      list |= (list >> Math.pow(2, i));
-    }
-
-    return (list & ~(list >> 1));
-  }
-
   toObject() {
     return {
+      details: this._details,
       id: this._id,
       roles: this._roles,
       token: this._token

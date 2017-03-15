@@ -6,7 +6,6 @@ export default class Auth {
     this._dao = null;
     this._key = null;
     this._roles = {};
-    this._permissions = {};
   }
 
   dao(value = null) {
@@ -45,20 +44,12 @@ export default class Auth {
     return this;
   }
 
-  permissions(value = null) {
-    if (value === null) {
-      return this._permissions;
-    }
-
-    merge(this._permissions, value);
-    return this;
-  }
-
   user(value) {
     const user = new User()
       .auth(this);
 
     if (value) {
+      user.details(value.details);
       user.id(value.id);
       user.roles(value.roles);
       user.token(value.token);
