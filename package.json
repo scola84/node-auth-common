@@ -5,8 +5,8 @@
   "repository": "github:scola84/node-auth-common",
   "author": "M.C. van den Boogaart <scola@kvdb.name>",
   "license": "MIT",
-  "main": "./dist/auth-common.js",
-  "jsnext:main": "index.js",
+  "main": "./index.js",
+  "jsnext:main": "./index.js",
   "dependencies": {
     "@scola/error": "^4.3.0",
     "@scola/validator": "^5.3.1"
