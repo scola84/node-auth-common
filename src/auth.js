@@ -5,6 +5,7 @@ export default class Auth {
   constructor() {
     this._dao = null;
     this._key = null;
+    this._cache = null;
     this._roles = {};
   }
 
@@ -26,12 +27,12 @@ export default class Auth {
     return this;
   }
 
-  model(value = null) {
+  cache(value = null) {
     if (value === null) {
-      return this._model;
+      return this._cache;
     }
 
-    this._model = value;
+    this._cache = value;
     return this;
   }
 
