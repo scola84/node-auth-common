@@ -45,16 +45,14 @@ export default class Auth {
     return this;
   }
 
-  user(value) {
+  user(value = {}) {
     const user = new User()
       .auth(this);
 
-    if (value) {
-      user.details(value.details);
-      user.id(value.id);
-      user.roles(value.roles);
-      user.token(value.token);
-    }
+    user.details(value.details);
+    user.id(value.id);
+    user.roles(value.roles);
+    user.token(value.token);
 
     return user;
   }
