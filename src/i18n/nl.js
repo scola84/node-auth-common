@@ -1,6 +1,7 @@
 export default {
   scola: {
     auth: {
+      closed: 'U bent niet verbonden met de server.',
       password: 'Wachtwoord',
       persistent: 'Laat mij ingelogd blijven',
       pop: {
