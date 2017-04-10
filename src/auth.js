@@ -1,12 +1,19 @@
-import merge from 'lodash-es/merge';
 import User from './user';
 
 export default class Auth {
   constructor() {
+    this._cache = null;
     this._dao = null;
     this._key = null;
-    this._cache = null;
-    this._roles = {};
+  }
+
+  cache(value = null) {
+    if (value === null) {
+      return this._cache;
+    }
+
+    this._cache = value;
+    return this;
   }
 
   dao(value = null) {
@@ -27,31 +34,14 @@ export default class Auth {
     return this;
   }
 
-  cache(value = null) {
-    if (value === null) {
-      return this._cache;
-    }
-
-    this._cache = value;
-    return this;
-  }
-
-  roles(value = null) {
-    if (value === null) {
-      return this._roles;
-    }
-
-    merge(this._roles, value);
-    return this;
-  }
-
   user(value = {}) {
     const user = new User()
       .auth(this);
 
     user.details(value.details);
+    user.duration(value.duration);
     user.id(value.id);
-    user.roles(value.roles);
+    user.permissions(value.permissions);
     user.token(value.token);
 
     return user;

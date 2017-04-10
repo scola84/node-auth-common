@@ -1,11 +1,10 @@
-import get from 'lodash-es/get';
-
 export default class User {
   constructor() {
     this._auth = null;
-    this._details = null;
+    this._details = {};
+    this._duration = null;
     this._id = null;
-    this._roles = null;
+    this._permissions = {};
     this._token = null;
   }
 
@@ -18,6 +17,10 @@ export default class User {
     return this;
   }
 
+  detail(name) {
+    return this._details[name];
+  }
+
   details(value = null) {
     if (value === null) {
       return this._details;
@@ -27,8 +30,13 @@ export default class User {
     return this;
   }
 
-  detail(name) {
-    return get(this._details, name);
+  duration(value = null) {
+    if (value === null) {
+      return this._duration;
+    }
+
+    this._duration = value;
+    return this;
   }
 
   id(value = null) {
@@ -40,12 +48,12 @@ export default class User {
     return this;
   }
 
-  roles(value = null) {
+  permissions(value = null) {
     if (value === null) {
-      return this._roles;
+      return this._permissions;
     }
 
-    this._roles = value;
+    this._permissions = value;
     return this;
   }
 
@@ -58,44 +66,15 @@ export default class User {
     return this;
   }
 
-  highest(name = false) {
-    // Adapted from http://stackoverflow.com/a/672137
-    let role = this._roles;
-
-    for (let i = 0; i < 5; i += 1) {
-      role |= (role >> Math.pow(2, i));
-    }
-
-    role = (role & ~(role >> 1));
-    return name === true ? this.name(role) : role;
-  }
-
-  name(number) {
-    let result = '';
-    const roles = this._auth.roles();
-
-    Object.keys(roles).forEach((name) => {
-      result = roles[name] === number ? name : result;
-    });
-
-    return result;
-  }
-
-  is(list) {
-    const roles = this._auth.roles();
-
-    list = list.reduce((result, current) => {
-      return result | roles[current];
-    }, 0);
-
-    return (this._roles & list) !== 0;
+  may(part, permission) {
+    return (this._permissions[part] & permission) > 0;
   }
 
   toObject() {
     return {
       details: this._details,
       id: this._id,
-      roles: this._roles,
+      permissions: this._permissions,
       token: this._token
     };
   }
