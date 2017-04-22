@@ -1,6 +1,7 @@
 export default {
   scola: {
     auth: {
+      caps: 'Caps Lock is on.',
       closed: 'You are not connected to the server.',
       password: 'Password',
       persistent: 'Keep me logged in',
