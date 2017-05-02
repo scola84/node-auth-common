@@ -5,6 +5,9 @@ export default class Auth {
     this._cache = null;
     this._dao = null;
     this._key = null;
+
+    this._password = true;
+    this._token = true;
   }
 
   cache(value = null) {
@@ -31,6 +34,24 @@ export default class Auth {
     }
 
     this._key = value;
+    return this;
+  }
+
+  password(value = null) {
+    if (value === null) {
+      return this._password;
+    }
+
+    this._password = value;
+    return this;
+  }
+
+  token(value = null) {
+    if (value === null) {
+      return this._token;
+    }
+
+    this._token = value;
     return this;
   }
 
