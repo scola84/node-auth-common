@@ -7,6 +7,7 @@ export default class Auth {
     this._key = null;
 
     this._password = true;
+    this._reset = true;
     this._token = true;
   }
 
@@ -43,6 +44,15 @@ export default class Auth {
     }
 
     this._password = value;
+    return this;
+  }
+
+  reset(value = null) {
+    if (value === null) {
+      return this._reset;
+    }
+
+    this._reset = value;
     return this;
   }
 
