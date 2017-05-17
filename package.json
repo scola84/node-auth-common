@@ -1,6 +1,6 @@
 {
   "name": "@scola/auth-common",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "Authorization (common)",
   "repository": "github:scola84/node-auth-common",
   "author": "M.C. van den Boogaart <scola@kvdb.name>",
