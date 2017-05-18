@@ -8,7 +8,7 @@ const regexp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!"#\$%&'\(\)\*\+,-\./:;<
 function checkAgain(field, value, errors) {
   if (value.password !== value.password2) {
     errors.password2 = {
-      regexp: false
+      equal: false
     };
   }
 }

@@ -47,6 +47,8 @@ export default {
       invalid_credentials: 'Uw gebruikersnaam en/of wachtwoord zijn niet juist.',
       invalid_hash: 'Er is een serverfout opgetreden.',
       invalid_mail: 'Er is een serverfout opgetreden.',
+      invalid_password: 'Het wachtwoord is niet sterk genoeg. Zie de aanwijzingen onder het formulier.',
+      invalid_password2: 'De wachtwoorden zijn niet gelijk.',
       invalid_sign: 'De sessie kan niet worden gestart.',
       invalid_token_login: 'Uw sessie is verlopen.',
       invalid_token_reset: 'De link om uw wachtwoord te wijzigen is verlopen.',

@@ -47,6 +47,8 @@ export default {
       invalid_credentials: 'Your username and/or password are incorrect.',
       invalid_hash: 'A server error occurred.',
       invalid_mail: 'A server error occurred.',
+      invalid_password: 'The password is not strong enough. Please see the instructions below the form.',
+      invalid_password2: 'The passwords are not equal.',
       invalid_sign: 'The session could not be started.',
       invalid_token_login: 'Your session has expired.',
       invalid_token_reset: 'The link to reset your password has expired.',
