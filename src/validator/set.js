@@ -3,7 +3,7 @@ import { Validator } from '@scola/validator';
 const setValidator = new Validator();
 
 // See https://www.thepolyglotdeveloper.com/2015/05/use-regex-to-test-password-strength-in-javascript/
-const regexp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+const regexp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!"#\$%&'\(\)\*\+,-\./:;<=>\?@\[\]\^_`\{\|\}~])(?=.{8,})/;
 
 function checkAgain(field, value, errors) {
   if (value.password !== value.password2) {
