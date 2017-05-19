@@ -36,8 +36,8 @@ export default {
           ok: 'OK'
         },
         success: {
-          text: 'You will be sent to the login page.',
-          title: 'Password reset'
+          text: 'Your password has been set. You will now be sent to the login page.',
+          title: 'Password set'
         }
       },
       username: 'Username'

@@ -36,7 +36,7 @@ export default {
           ok: 'OK'
         },
         success: {
-          text: 'U wordt doorgestuurd naar de login-pagina.',
+          text: 'Uw wachtwoord is gewijzigd. U wordt nu doorgestuurd naar de inlogpagina.',
           title: 'Wijzigen gelukt'
         }
       },
