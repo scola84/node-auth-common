@@ -52,7 +52,19 @@ export default {
       invalid_sign: 'The session could not be started.',
       invalid_token_login: 'Your session has expired.',
       invalid_token_reset: 'The link to reset your password has expired.',
-      invalid_user: 'You are not logged in.'
+      invalid_user: 'You are not logged in.',
+      short: {
+        invalid_auth: 'No Access',
+        invalid_credentials: 'Credentials Incorrect',
+        invalid_hash: 'Server Error',
+        invalid_mail: 'Server Error',
+        invalid_password: 'Password Not Strong',
+        invalid_password2: 'Passwords Not Equal',
+        invalid_sign: 'Session Error',
+        invalid_token_login: 'Session Error',
+        invalid_token_reset: 'Link Expired',
+        invalid_user: 'Not Logged In'
+      }
     }
   }
 };

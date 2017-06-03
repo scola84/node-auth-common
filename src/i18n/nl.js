@@ -52,7 +52,19 @@ export default {
       invalid_sign: 'De sessie kan niet worden gestart.',
       invalid_token_login: 'Uw sessie is verlopen.',
       invalid_token_reset: 'De link om uw wachtwoord te wijzigen is verlopen.',
-      invalid_user: 'U bent niet ingelogd.'
+      invalid_user: 'U bent niet ingelogd.',
+      short: {
+        invalid_auth: 'Geen toegang',
+        invalid_credentials: 'Gegevens onjuist',
+        invalid_hash: 'Serverfout',
+        invalid_mail: 'Serverfout',
+        invalid_password: 'Wachwoord niet sterk',
+        invalid_password2: 'Wachtwoorden niet gelijk.',
+        invalid_sign: 'Sessiefout',
+        invalid_token_login: 'Sessiefout',
+        invalid_token_reset: 'Link verlopen',
+        invalid_user: 'Niet ingelogd',
+      }
     }
   }
 };
