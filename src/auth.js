@@ -4,11 +4,22 @@ export default class Auth {
   constructor() {
     this._cache = null;
     this._dao = null;
-    this._key = null;
 
     this._password = true;
     this._reset = true;
     this._token = true;
+  }
+
+  destroy() {
+    if (this._cache) {
+      this._cache.destroy();
+      this._cache = null;
+    }
+
+    if (this._dao) {
+      this._dao.destroy();
+      this._dao = null;
+    }
   }
 
   cache(value = null) {
@@ -26,15 +37,6 @@ export default class Auth {
     }
 
     this._dao = value;
-    return this;
-  }
-
-  key(value = null) {
-    if (value === null) {
-      return this._key;
-    }
-
-    this._key = value;
     return this;
   }
 
