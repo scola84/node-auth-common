@@ -78,7 +78,7 @@ export default class User {
 
   may(part, ...fields) {
     return fields.some((field) => {
-      return field.indexOf('*') ?
+      return field.indexOf('*') > -1 ?
         this._mayWildcard(part, field) :
         this._may(part, field);
     });
