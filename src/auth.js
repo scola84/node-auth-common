@@ -1,9 +1,11 @@
+import merge from 'lodash-es/merge';
 import User from './user';
 
 export default class Auth {
   constructor() {
     this._cache = null;
     this._dao = null;
+    this._masks = {};
 
     this._password = true;
     this._reset = true;
@@ -37,6 +39,15 @@ export default class Auth {
     }
 
     this._dao = value;
+    return this;
+  }
+
+  masks(value = null) {
+    if (value === null) {
+      return this._masks;
+    }
+
+    merge(this._masks, value);
     return this;
   }
 
@@ -74,6 +85,7 @@ export default class Auth {
     user.details(value.details);
     user.duration(value.duration);
     user.id(value.id);
+    user.masks(this._masks);
     user.permissions(value.permissions);
     user.token(value.token);
 

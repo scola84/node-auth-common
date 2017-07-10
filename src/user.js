@@ -4,6 +4,7 @@ export default class User {
     this._details = {};
     this._duration = null;
     this._id = null;
+    this._masks = {};
     this._permissions = {};
     this._token = null;
   }
@@ -48,6 +49,15 @@ export default class User {
     return this;
   }
 
+  masks(value = null) {
+    if (value === null) {
+      return this._masks;
+    }
+
+    this._masks = value;
+    return this;
+  }
+
   permissions(value = null) {
     if (value === null) {
       return this._permissions;
@@ -66,8 +76,12 @@ export default class User {
     return this;
   }
 
-  may(part, permission) {
-    return (this._permissions[part] & permission) > 0;
+  may(part, ...fields) {
+    return fields.some((field) => {
+      return field.indexOf('*') ?
+        this._mayWildcard(part, field) :
+        this._may(part, field);
+    });
   }
 
   toObject() {
@@ -77,5 +91,23 @@ export default class User {
       permissions: this._permissions,
       token: this._token
     };
+  }
+
+  _may(part, field) {
+    return (this._permissions[part] &
+      this._masks[part][field]) > 0;
+  }
+
+  _mayWildcard(part, field) {
+    field = new RegExp(field.replace('*', '.*'));
+
+    return Object.keys(this._masks[part]).some((key) => {
+      if (field.test(key)) {
+        return (this._permissions[part] &
+          this._masks[part][key]) > 0;
+      }
+
+      return false;
+    });
   }
 }
