@@ -1,3 +1,5 @@
+import get from 'lodash-es/get';
+
 export default class User {
   constructor() {
     this._auth = null;
@@ -76,12 +78,14 @@ export default class User {
     return this;
   }
 
-  may(part, ...fields) {
-    return fields.some((field) => {
-      return field.indexOf('*') > -1 ?
-        this._mayWildcard(part, field) :
-        this._may(part, field);
-    });
+  may(field) {
+    field = field.split('.');
+
+    if (field[field.length - 1] === '*') {
+      return this._mayWildcard(field.slice(0, -1));
+    }
+
+    return this._may(field);
   }
 
   toObject() {
@@ -93,21 +97,19 @@ export default class User {
     };
   }
 
-  _may(part, field) {
-    return (this._permissions[part] &
-      this._masks[part][field]) > 0;
+  _may(field) {
+    const permission = this._permissions[field[0]];
+    const mask = get(this._masks, field);
+
+    return (permission & mask) > 0;
   }
 
-  _mayWildcard(part, field) {
-    field = new RegExp(field.replace('*', '.*'));
+  _mayWildcard(field) {
+    const permission = this._permissions[field[0]];
+    const masks = get(this._masks, field);
 
-    return Object.keys(this._masks[part]).some((key) => {
-      if (field.test(key)) {
-        return (this._permissions[part] &
-          this._masks[part][key]) > 0;
-      }
-
-      return false;
+    return Object.keys(masks).some((key) => {
+      return (permission & masks[key]) > 0;
     });
   }
 }
