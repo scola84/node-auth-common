@@ -17,11 +17,6 @@ export default class Auth {
       this._cache.destroy();
       this._cache = null;
     }
-
-    if (this._dao) {
-      this._dao.destroy();
-      this._dao = null;
-    }
   }
 
   cache(value = null) {
