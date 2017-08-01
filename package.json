@@ -8,6 +8,7 @@
   "main": "./index.js",
   "jsnext:main": "./index.js",
   "dependencies": {
-    "@scola/validator": "^6.1.1"
+    "@scola/validator": "^6.1.1",
+    "lodash-es": "^4.17.4"
   }
 }
