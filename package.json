@@ -8,6 +8,6 @@
   "main": "./index.js",
   "jsnext:main": "./index.js",
   "dependencies": {
-    "@scola/validator": "^6.0.4"
+    "@scola/validator": "^6.1.1"
   }
 }
